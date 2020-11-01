@@ -42,6 +42,8 @@ class Util {
         return parseInt(this.map(Math.random(), 0, 1, value1, value2));
     }
 
+    // ~ ~ ~   input   ~ ~ ~ 
+
     getKeyCode(event) {
         var k = event.charCode || event.keyCode;
         var c = String.fromCharCode(k).toLowerCase();
@@ -50,6 +52,72 @@ class Util {
 
     checkForMouse() {
     	return !window.matchMedia("(any-pointer:coarse)").matches;
+    }
+
+    // ~ ~ ~   browser   ~ ~ ~
+
+    checkQueryInUrl(key) {
+        let query = window.location.search.substring(1);
+        let pairs = query.split("&");
+        for (let i=0; i<pairs.length; i++) {
+            let pair = pairs[i].split("=");
+            if (pair[0] == key) { 
+                return true;
+            }
+        }
+        
+        return(false);
+    }
+
+    getQueryFromUrl(key) {
+        let query = window.location.search.substring(1);
+        let pairs = query.split("&");
+        for (let i=0; i<pairs.length; i++) {
+            let pair = pairs[i].split("=");
+            if (pair[0] == key) { 
+                return pair[1];
+            }
+        }
+        
+        return(false);
+    }
+
+    setCookie(cname, cvalue, exdays) {
+        let d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    getCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    checkCookie(cname, cDefaultValue, exDays) {
+        let cvalue = getCookie(cname);
+        
+        if (cvalue != "") {
+            return cvalue;
+        } else {
+            setCookie(cname, cDefaultValue, exDays);
+            cvalue = getCookie(cname);
+            if (cvalue != "") {
+                return cvalue;
+            }
+        }
+
+        return "";
     }
 
 }
