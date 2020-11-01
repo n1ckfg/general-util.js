@@ -120,16 +120,16 @@ class Util {
         return "";
     }
 
-    saveAsImage() {
+    saveImage() {
         let imgData, imgNode;
         let strMime = "image/jpeg";
         let strDownloadMime = "image/octet-stream";
 
         try {
             imgData = renderer.domElement.toDataURL(strMime);
-            saveFile(imgData.replace(strMime, strDownloadMime), "test.jpg");
+            this.saveFile(imgData.replace(strMime, strDownloadMime), "test.jpg");
         } catch (e) {
-            console.log(e);
+            console.log("Error saving image: " + e);
             return;
         }
     }
