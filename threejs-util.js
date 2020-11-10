@@ -10,7 +10,7 @@ let isFlyingDown = false;
 let flyingAllowed = true;
 let flyingThreshold = 0.15;
 let movingSpeed = 0;
-let movingSpeedMax = 0.04;
+let movingSpeedMax = 0.4; //0.04;
 let movingDelta = 0.002;
 let floor = 0;
 let gravity = 0.01;
@@ -33,33 +33,33 @@ function setupControls() {
     */
     
     window.addEventListener("keydown", function(event) {
-        if (getKeyCode(event) == 'w') isWalkingForward = true;
-        if (getKeyCode(event) == 'a') isWalkingLeft = true;
-        if (getKeyCode(event) == 's') isWalkingBackward = true;
-        if (getKeyCode(event) == 'd') isWalkingRight = true;
-        if (getKeyCode(event) == 'q') isFlyingDown = true;
-        if (getKeyCode(event) == 'e') isFlyingUp = true;
+        if (util.getKeyCode(event) == 'w') isWalkingForward = true;
+        if (util.getKeyCode(event) == 'a') isWalkingLeft = true;
+        if (util.getKeyCode(event) == 's') isWalkingBackward = true;
+        if (util.getKeyCode(event) == 'd') isWalkingRight = true;
+        if (util.getKeyCode(event) == 'q') isFlyingDown = true;
+        if (util.getKeyCode(event) == 'e') isFlyingUp = true;
 
-        if (getKeyCode(event) == 'o') armSaveJson = true;
-        if (getKeyCode(event) == 'j') armFrameBack = true;
-        if (getKeyCode(event) == 'k' || getKeyCode(event) == ' ') armTogglePause = true;
-        if (getKeyCode(event) == 'l') armFrameForward = true;      
+        if (util.getKeyCode(event) == 'o') armSaveJson = true;
+        if (util.getKeyCode(event) == 'j') armFrameBack = true;
+        if (util.getKeyCode(event) == 'k' || util.getKeyCode(event) == ' ') armTogglePause = true;
+        if (util.getKeyCode(event) == 'l') armFrameForward = true;      
     });
 
     window.addEventListener("keyup", function(event) {
-        if (getKeyCode(event) == 'w') isWalkingForward = false;
-        if (getKeyCode(event) == 'a') isWalkingLeft = false;
-        if (getKeyCode(event) == 's') isWalkingBackward = false;
-        if (getKeyCode(event) == 'd') isWalkingRight = false;
-        if (getKeyCode(event) == 'q') isFlyingDown = false;
-        if (getKeyCode(event) == 'e') isFlyingUp = false;
+        if (util.getKeyCode(event) == 'w') isWalkingForward = false;
+        if (util.getKeyCode(event) == 'a') isWalkingLeft = false;
+        if (util.getKeyCode(event) == 's') isWalkingBackward = false;
+        if (util.getKeyCode(event) == 'd') isWalkingRight = false;
+        if (util.getKeyCode(event) == 'q') isFlyingDown = false;
+        if (util.getKeyCode(event) == 'e') isFlyingUp = false;
     });
 }
 
 function setupPlayer() {
-    cameraGaze = new THREE.Object3D();
-    cameraGaze.position.set(0, 0.1, -60);
-    camera.add(cameraGaze);
+    //cameraGaze = new THREE.Object3D();
+    //cameraGaze.position.set(0, 0.1, -60);
+    //camera.add(cameraGaze);
 
     setupControls();
 }
@@ -73,9 +73,9 @@ function updatePlayer() {
     }
     */
 
-    let cameraPos = camera.position.clone();
-    let targetPos = cameraPos.clone();
-    let aimPos = cameraGaze.getWorldPosition();
+    //let cameraPos = camera.position.clone();
+    //let targetPos = cameraPos.clone();
+    //let aimPos = cameraGaze.getWorldPosition();
 
     if ((isWalkingForward || isWalkingBackward || isWalkingLeft || isWalkingRight || isFlyingUp || isFlyingDown) && movingSpeed < movingSpeedMax) {
         if (movingSpeed < movingSpeedMax) {
@@ -117,8 +117,8 @@ function updatePlayer() {
     	}
 
         //camera.position.set(targetPos.x, targetPos.y, targetPos.z);
-        camera.updateMatrixWorld();
-        camera.lookAt(aimPos);
+        //camera.updateMatrixWorld();
+        //camera.lookAt(aimPos);
     }
 
     /*
