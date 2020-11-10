@@ -33,26 +33,21 @@ function setupControls() {
     */
     
     window.addEventListener("keydown", function(event) {
-        if (util.getKeyCode(event) == 'w') isWalkingForward = true;
-        if (util.getKeyCode(event) == 'a') isWalkingLeft = true;
-        if (util.getKeyCode(event) == 's') isWalkingBackward = true;
-        if (util.getKeyCode(event) == 'd') isWalkingRight = true;
-        if (util.getKeyCode(event) == 'q') isFlyingDown = true;
-        if (util.getKeyCode(event) == 'e') isFlyingUp = true;
-
-        if (util.getKeyCode(event) == 'o') armSaveJson = true;
-        if (util.getKeyCode(event) == 'j') armFrameBack = true;
-        if (util.getKeyCode(event) == 'k' || util.getKeyCode(event) == ' ') armTogglePause = true;
-        if (util.getKeyCode(event) == 'l') armFrameForward = true;      
+        if (util.getKeyCode(event) === 'w') isWalkingForward = true;
+        if (util.getKeyCode(event) === 'a') isWalkingLeft = true;
+        if (util.getKeyCode(event) === 's') isWalkingBackward = true;
+        if (util.getKeyCode(event) === 'd') isWalkingRight = true;
+        if (util.getKeyCode(event) === 'q') isFlyingDown = true;
+        if (util.getKeyCode(event) === 'e') isFlyingUp = true;
     });
 
     window.addEventListener("keyup", function(event) {
-        if (util.getKeyCode(event) == 'w') isWalkingForward = false;
-        if (util.getKeyCode(event) == 'a') isWalkingLeft = false;
-        if (util.getKeyCode(event) == 's') isWalkingBackward = false;
-        if (util.getKeyCode(event) == 'd') isWalkingRight = false;
-        if (util.getKeyCode(event) == 'q') isFlyingDown = false;
-        if (util.getKeyCode(event) == 'e') isFlyingUp = false;
+        if (util.getKeyCode(event) === 'w') isWalkingForward = false;
+        if (util.getKeyCode(event) === 'a') isWalkingLeft = false;
+        if (util.getKeyCode(event) === 's') isWalkingBackward = false;
+        if (util.getKeyCode(event) === 'd') isWalkingRight = false;
+        if (util.getKeyCode(event) === 'q') isFlyingDown = false;
+        if (util.getKeyCode(event) === 'e') isFlyingUp = false;
     });
 }
 
