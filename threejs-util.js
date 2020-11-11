@@ -49,6 +49,28 @@ function setupControls() {
         if (util.getKeyCode(event) === 'q') isFlyingDown = false;
         if (util.getKeyCode(event) === 'e') isFlyingUp = false;
     });
+
+    window.addEventListener("resize", function(event) {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }, false);
+
+    document.addEventListener("mousedown", function(event) {
+        //
+    }, false);
+    
+    document.addEventListener("mousemove",  function(event) {
+        //
+    }, false);
+    
+    document.addEventListener("mouseup",  function(event) {
+        //
+    }, false);
+    
+    document.addEventListener("wheel",  function(event) {
+        //
+    }, false);
 }
 
 function setupPlayer() {
