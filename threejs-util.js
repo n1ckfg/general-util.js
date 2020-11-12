@@ -51,9 +51,14 @@ function setupControls() {
     });
 
     window.addEventListener("resize", function(event) {
-        camera.aspect = window.innerWidth / window.innerHeight;
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        camera.aspect = width / height;
         camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        renderer.setSize( width, height );
+        composer.setSize( width, height );
     }, false);
 
     document.addEventListener("mousedown", function(event) {
