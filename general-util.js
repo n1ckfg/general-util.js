@@ -18,6 +18,16 @@ class Util {
         return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
     }
 
+    clamp(val, min, max) {
+        if (val < min) {
+            return min;
+        } else if (val > max) {
+            return max;
+        } else {
+            return val;
+        }
+    }
+
     millis() {
         return parseInt(now * 1000);
     }
