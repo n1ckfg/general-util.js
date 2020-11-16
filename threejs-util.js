@@ -1,5 +1,29 @@
 "use strict";
 
+function clearScene(obj) {
+    while (obj.children.length > 0) { 
+        clearScene(obj.children[0]);
+        obj.remove(obj.children[0]);
+    }
+    
+    if (obj.geometry) obj.geometry.dispose();
+
+    if (obj.material) { 
+        // in case of map, bumpMap, normalMap, envMap ...
+        Object.keys(obj.material).forEach(prop => {
+            if (!obj.material[prop]) {
+                return;         
+            }
+            if (obj.material[prop] !== null && typeof obj.material[prop].dispose === 'function') {
+                obj.material[prop].dispose();
+            }                                                  
+        });
+        obj.material.dispose();
+    }
+} 
+
+
+// ~ ~ ~ ~ ~ ~ ~ ~    KEYBOARD   ~ ~ ~ ~ ~ ~ ~ ~ 
 let isWalkingForward = false;
 let isWalkingBackward = false;
 let isWalkingLeft = false;
@@ -151,4 +175,72 @@ function updatePlayer() {
     */
 }
 
+// ~ ~ ~ ~ ~ ~ ~ ~    MOUSE   ~ ~ ~ ~ ~ ~ ~ ~ 
+
+let rotateStart = new THREE.Vector2(0,0);
+let rotateEnd = new THREE.Vector2(0,0);
+let rotateDelta = new THREE.Vector2(0,0);
+let isDragging = false;
+let MOUSE_SPEED_X = 0;
+let MOUSE_SPEED_Y = 0;
+let phi = 0;
+let theta = 0;
+
+window.addEventListener("mousedown", function(event) {
+    rotateStart.set(event.clientX, event.clientY);
+    isDragging = true;
+    MOUSE_SPEED_X = 0.5;
+    MOUSE_SPEED_Y = 0.3;
+});
+
+// Very similar to https://gist.github.com/mrflix/8351020
+window.addEventListener("mousemove", function(event) {
+    if (!isDragging && !isPointerLocked()) {
+        return;
+    }
+
+    // Support pointer lock API.
+    if (isPointerLocked()) {
+        let movementX = event.movementX || event.mozMovementX || 0;
+        let movementY = event.movementY || event.mozMovementY || 0;
+        rotateEnd.set(rotateStart.x - movementX, rotateStart.y - movementY);
+    } else {
+        rotateEnd.set(event.clientX, event.clientY);
+    }
+
+    // Calculate how much we moved in mouse space.
+    rotateDelta.subVectors(rotateEnd, rotateStart);
+    rotateStart.copy(rotateEnd);
+
+    // Keep track of the cumulative euler angles.
+    let element = document.body;
+    phi += 2 * Math.PI * rotateDelta.y / element.clientHeight * MOUSE_SPEED_Y;
+    theta += 2 * Math.PI * rotateDelta.x / element.clientWidth * MOUSE_SPEED_X;
+
+    // Prevent looking too far up or down.
+    phi = util.clamp(phi, -Math.PI/2, Math.PI/2);
+
+    let euler = new THREE.Euler(-phi, -theta, 0, 'YXZ');
+    camera.quaternion.setFromEuler(euler);
+});
+
+window.addEventListener("mouseup", function(event) {
+    isDragging = false;
+    MOUSE_SPEED_X = 0;
+    MOUSE_SPEED_Y = 0;
+});
+
+function isPointerLocked() {
+    let el = document.pointerLockElement || document.mozPointerLockElement || document.webkitPointerLockElement;
+    return el !== undefined;
+}
+
+function resetCameraPosition() {
+    camera.position.set(0, 0, 0);
+    camera.lookAt(0, 0, 0);
+    phi = 0;
+    theta = 0;
+}
+
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
