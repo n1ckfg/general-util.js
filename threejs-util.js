@@ -85,21 +85,23 @@ function setupControls() {
         composer.setSize( width, height );
     }, false);
 
-    document.addEventListener("mousedown", function(event) {
+    /*
+    window.addEventListener("mousedown", function(event) {
         //
     }, false);
     
-    document.addEventListener("mousemove",  function(event) {
+    window.addEventListener("mousemove",  function(event) {
         //
     }, false);
     
-    document.addEventListener("mouseup",  function(event) {
+    window.addEventListener("mouseup",  function(event) {
         //
     }, false);
     
-    document.addEventListener("wheel",  function(event) {
+    window.addEventListener("wheel",  function(event) {
         //
     }, false);
+    */
 }
 
 function setupPlayer() {
@@ -177,20 +179,22 @@ function updatePlayer() {
 
 // ~ ~ ~ ~ ~ ~ ~ ~    MOUSE   ~ ~ ~ ~ ~ ~ ~ ~ 
 
-let rotateStart = new THREE.Vector2(0,0);
+let rotateStart = new THREE.Vector2(window.innerWidth/2, window.innerHeight/2);
 let rotateEnd = new THREE.Vector2(0,0);
 let rotateDelta = new THREE.Vector2(0,0);
-let isDragging = false;
-let MOUSE_SPEED_X = 0;
-let MOUSE_SPEED_Y = 0;
+let isDragging = true;
+let MOUSE_SPEED_X = 0.5;
+let MOUSE_SPEED_Y = 0.3;
 let phi = 0;
 let theta = 0;
 
 window.addEventListener("mousedown", function(event) {
     rotateStart.set(event.clientX, event.clientY);
     isDragging = true;
-    MOUSE_SPEED_X = 0.5;
-    MOUSE_SPEED_Y = 0.3;
+});
+
+window.addEventListener("focus", function(event) {
+    isDragging = true;
 });
 
 // Very similar to https://gist.github.com/mrflix/8351020
@@ -224,10 +228,14 @@ window.addEventListener("mousemove", function(event) {
     camera.quaternion.setFromEuler(euler);
 });
 
+/*
 window.addEventListener("mouseup", function(event) {
     isDragging = false;
-    MOUSE_SPEED_X = 0;
-    MOUSE_SPEED_Y = 0;
+});
+*/
+
+window.addEventListener("blur", function(event) {
+    isDragging = false;
 });
 
 function isPointerLocked() {
