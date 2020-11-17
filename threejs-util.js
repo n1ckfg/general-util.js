@@ -182,7 +182,7 @@ function updatePlayer() {
 let rotateStart = new THREE.Vector2(window.innerWidth/2, window.innerHeight/2);
 let rotateEnd = new THREE.Vector2(0,0);
 let rotateDelta = new THREE.Vector2(0,0);
-let isDragging = true;
+let isDragging = false;
 let MOUSE_SPEED_X = 0.5;
 let MOUSE_SPEED_Y = 0.3;
 let phi = 0;
@@ -193,9 +193,11 @@ window.addEventListener("mousedown", function(event) {
     isDragging = true;
 });
 
+/*
 window.addEventListener("focus", function(event) {
     isDragging = true;
 });
+*/
 
 // Very similar to https://gist.github.com/mrflix/8351020
 window.addEventListener("mousemove", function(event) {
@@ -228,15 +230,15 @@ window.addEventListener("mousemove", function(event) {
     camera.quaternion.setFromEuler(euler);
 });
 
-/*
 window.addEventListener("mouseup", function(event) {
     isDragging = false;
 });
-*/
 
+/*
 window.addEventListener("blur", function(event) {
     isDragging = false;
 });
+*/
 
 function isPointerLocked() {
     let el = document.pointerLockElement || document.mozPointerLockElement || document.webkitPointerLockElement;
