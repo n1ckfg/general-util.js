@@ -34,7 +34,7 @@ window.addEventListener("mousemove", function(event) {
     phi += 2 * Math.PI * rotateDelta.y / element.clientHeight * MOUSE_SPEED_Y;
     theta += 2 * Math.PI * rotateDelta.x / element.clientWidth * MOUSE_SPEED_X;
 
-    phi = util.clamp(phi, -Math.PI/2, Math.PI/2);
+    phi = Util.clamp(phi, -Math.PI/2, Math.PI/2);
 
     let euler = new THREE.Euler(-phi, -theta, 0, 'YXZ');
     camera.quaternion.setFromEuler(euler);

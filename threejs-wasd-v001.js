@@ -13,21 +13,21 @@ let movingDelta = 0.002;
 
 function setupPlayer() {
     window.addEventListener("keydown", function(event) {
-        if (util.getKeyCode(event) === 'w') isWalkingForward = true;
-        if (util.getKeyCode(event) === 'a') isWalkingLeft = true;
-        if (util.getKeyCode(event) === 's') isWalkingBackward = true;
-        if (util.getKeyCode(event) === 'd') isWalkingRight = true;
-        if (util.getKeyCode(event) === 'q') isFlyingDown = true;
-        if (util.getKeyCode(event) === 'e') isFlyingUp = true;
+        if (Util.getKeyCode(event) === 'w') isWalkingForward = true;
+        if (Util.getKeyCode(event) === 'a') isWalkingLeft = true;
+        if (Util.getKeyCode(event) === 's') isWalkingBackward = true;
+        if (Util.getKeyCode(event) === 'd') isWalkingRight = true;
+        if (Util.getKeyCode(event) === 'q') isFlyingDown = true;
+        if (Util.getKeyCode(event) === 'e') isFlyingUp = true;
     });
 
     window.addEventListener("keyup", function(event) {
-        if (util.getKeyCode(event) === 'w') isWalkingForward = false;
-        if (util.getKeyCode(event) === 'a') isWalkingLeft = false;
-        if (util.getKeyCode(event) === 's') isWalkingBackward = false;
-        if (util.getKeyCode(event) === 'd') isWalkingRight = false;
-        if (util.getKeyCode(event) === 'q') isFlyingDown = false;
-        if (util.getKeyCode(event) === 'e') isFlyingUp = false;
+        if (Util.getKeyCode(event) === 'w') isWalkingForward = false;
+        if (Util.getKeyCode(event) === 'a') isWalkingLeft = false;
+        if (Util.getKeyCode(event) === 's') isWalkingBackward = false;
+        if (Util.getKeyCode(event) === 'd') isWalkingRight = false;
+        if (Util.getKeyCode(event) === 'q') isFlyingDown = false;
+        if (Util.getKeyCode(event) === 'e') isFlyingUp = false;
     });
 }
 

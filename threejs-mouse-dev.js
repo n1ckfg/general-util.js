@@ -45,7 +45,7 @@ window.addEventListener("mousemove", function(event) {
     theta += 2 * Math.PI * rotateDelta.x / element.clientWidth * MOUSE_SPEED_X;
 
     // Prevent looking too far up or down.
-    phi = util.clamp(phi, -Math.PI/2, Math.PI/2);
+    phi = Util.clamp(phi, -Math.PI/2, Math.PI/2);
 
     let euler = new THREE.Euler(-phi, -theta, 0, 'YXZ');
     camera.quaternion.setFromEuler(euler);

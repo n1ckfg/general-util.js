@@ -2,23 +2,19 @@
 
 class Util {
 
-    constructor() {
-        //
-    }
-
-    lerp(start, end, value){
+    static lerp(start, end, value){
         return (1 - value) * start + value * end
     }
 
-    distance(x1, y1, x2, y2) {
+    static distance(x1, y1, x2, y2) {
         return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
     }
 
-    map(s, a1, a2, b1, b2) {
+    static map(s, a1, a2, b1, b2) {
         return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
     }
 
-    clamp(val, min, max) {
+    static clamp(val, min, max) {
         if (val < min) {
             return min;
         } else if (val > max) {
@@ -28,45 +24,45 @@ class Util {
         }
     }
 
-    millis() {
+    static millis() {
         return parseInt(now * 1000);
     }
 
-    diceHandler(value) {
+    static diceHandler(value) {
         return Math.random() < value;
     }
 
-    random(value) {
+    static random(value) {
         return Math.random() * value;
     }
 
-    randomRange(value1, value2) {
+    static randomRange(value1, value2) {
         return this.map(Math.random(), 0, 1, value1, value2);
     }
 
-    randomInt(value) {
+    static randomInt(value) {
         return parseInt(Math.random() * value);
     }
 
-    randomRangeInt(value1, value2) {
+    static randomRangeInt(value1, value2) {
         return parseInt(this.map(Math.random(), 0, 1, value1, value2));
     }
 
     // ~ ~ ~   input   ~ ~ ~ 
 
-    getKeyCode(event) {
+    static getKeyCode(event) {
         var k = event.charCode || event.keyCode;
         var c = String.fromCharCode(k).toLowerCase();
         return c;
     }
 
-    checkForMouse() {
+    static checkForMouse() {
     	return !window.matchMedia("(any-pointer:coarse)").matches;
     }
 
     // ~ ~ ~   browser   ~ ~ ~
 
-    checkQueryInUrl(key) {
+    static checkQueryInUrl(key) {
         let query = window.location.search.substring(1);
         let pairs = query.split("&");
         for (let i=0; i<pairs.length; i++) {
@@ -79,7 +75,7 @@ class Util {
         return(false);
     }
 
-    getQueryFromUrl(key) {
+    static getQueryFromUrl(key) {
         let query = window.location.search.substring(1);
         let pairs = query.split("&");
         for (let i=0; i<pairs.length; i++) {
@@ -92,59 +88,29 @@ class Util {
         return(false);
     }
 
-    setCookie(cname, cvalue, exdays) {
-        let d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        let expires = "expires="+d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    static setCookie(name, value) {
+        window.localStorage.setItem(name, value);
     }
 
-    getCookie(cname) {
-        let name = cname + "=";
-        let ca = document.cookie.split(';');
-        for(let i = 0; i < ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
+    static getCookie(name) {
+        return window.localStorage.getItem(name);
     }
 
-    checkCookie(cname, cDefaultValue, exDays) {
-        let cvalue = getCookie(cname);
-        
-        if (cvalue != "") {
-            return cvalue;
-        } else {
-            setCookie(cname, cDefaultValue, exDays);
-            cvalue = getCookie(cname);
-            if (cvalue != "") {
-                return cvalue;
-            }
-        }
-
-        return "";
-    }
-
-    saveImage() {
+    static saveImage() {
         let imgData, imgNode;
         let strMime = "image/jpeg";
         let strDownloadMime = "image/octet-stream";
 
         try {
             imgData = renderer.domElement.toDataURL(strMime);
-            this.saveFile(imgData.replace(strMime, strDownloadMime), "test.jpg");
+            Util.saveFile(imgData.replace(strMime, strDownloadMime), "test.jpg");
         } catch (e) {
             console.log("Error saving image: " + e);
             return;
         }
     }
 
-    saveFile(strData, filename) {
+    static saveFile(strData, filename) {
         let link = document.createElement('a');
         if (typeof link.download === 'string') {
             document.body.appendChild(link); //Firefox requires the link to be in the body
@@ -181,4 +147,3 @@ class Util {
       */
 }
 
-const util = new Util();
