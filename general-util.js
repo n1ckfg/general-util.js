@@ -25,7 +25,7 @@ class Util {
     }
 
     static millis() {
-        return parseInt(now * 1000);
+        return new Date();
     }
 
     static diceHandler(value) {
