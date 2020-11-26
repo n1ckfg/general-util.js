@@ -25,7 +25,7 @@ class Util {
     }
 
     static millis() {
-        return new Date();
+        return parseInt(performance.now());
     }
 
     static diceHandler(value) {
