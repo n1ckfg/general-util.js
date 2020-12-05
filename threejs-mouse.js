@@ -70,12 +70,25 @@ function setupMouse() {
 
         window.addEventListener("touchmove", function(event) {
             //
-        })
+        });
 
         window.addEventListener("touchend", function(event) {
             isWalkingForward = false;
-        })
+        });
     }
 }
 
+function updateMousePos(event) {
+    mouse3D = new THREE.Vector3((event.clientX / window.innerWidth) * 2 - 1, -(event.clientY / window.innerHeight) * 2 + 1, 0.5);
+    mouse3D.unproject(camera);   
+    if (latkDebug) console.log(mouse3D);
+}
 
+function updateTouchPos(event) {
+    if (event.targetTouches.length > 0) {
+        let touch = event.targetTouches[0];
+        mouse3D = new THREE.Vector3((touch.pageX / window.innerWidth) * 2 - 1, -(touch.pageY / window.innerHeight) * 2 + 1, 0.5);
+        mouse3D.unproject(camera);   
+        //if (debug) console.log(mouse3D);    
+    }
+}
