@@ -7,6 +7,10 @@ function setupTouch() {
         isWalkingForward = true;
     });
 
+    window.addEventListener("touchmove", function(event) {
+    	//
+    })
+
     window.addEventListener("touchend", function(event) {
         isWalkingForward = false;
     })
