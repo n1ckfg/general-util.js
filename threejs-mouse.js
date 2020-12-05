@@ -10,6 +10,7 @@ let MOUSE_SPEED_Y = 0.3;
 let phi = 0;
 let theta = 0;
 let checkFocus = false;
+let useTouch = false;
 
 function setupMouse() {
     window.addEventListener("mousedown", function(event) {
@@ -60,6 +61,20 @@ function setupMouse() {
         window.addEventListener("blur", function(event) {
             isDragging = false;
         });
+    }
+
+    if (useTouch) {
+        window.addEventListener("touchstart", function(event) {
+            isWalkingForward = true;
+        });
+
+        window.addEventListener("touchmove", function(event) {
+            //
+        })
+
+        window.addEventListener("touchend", function(event) {
+            isWalkingForward = false;
+        })
     }
 }
 
