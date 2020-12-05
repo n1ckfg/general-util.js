@@ -1,8 +1,21 @@
 "use strict";
 
-function clearScene(obj) {
+function clearScene(preserveList) {
+    for (let obj of scene.children) {
+        let doRemove = true;
+        for (let preserveObj of preserveList) {
+            if (obj === preserveObj) {
+                doRemove = false;
+                break;
+            }
+        }
+        if (doRemove) clearObj(obj);
+    }
+}
+
+function clearObj(obj) {
     while (obj.children.length > 0) { 
-        clearScene(obj.children[0]);
+        clearObj(obj.children[0]);
         obj.remove(obj.children[0]);
     }
     

@@ -11,7 +11,7 @@ let movingSpeed = 0;
 let movingSpeedMax = 0.04;
 let movingDelta = 0.002;
 
-function setupPlayer() {
+function setupWasd() {
     window.addEventListener("keydown", function(event) {
         if (Util.getKeyCode(event) === 'w') isWalkingForward = true;
         if (Util.getKeyCode(event) === 'a') isWalkingLeft = true;
@@ -31,7 +31,7 @@ function setupPlayer() {
     });
 }
 
-function updatePlayer() {
+function updateWasd() {
     if ((isWalkingForward || isWalkingBackward || isWalkingLeft || isWalkingRight || isFlyingUp || isFlyingDown) && movingSpeed < movingSpeedMax) {
         if (movingSpeed < movingSpeedMax) {
             movingSpeed += movingDelta;
