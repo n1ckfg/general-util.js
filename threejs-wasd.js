@@ -11,8 +11,11 @@ let movingSpeed = 0;
 let movingSpeedMax = 0.04;
 let movingDelta = 0.002;
 
+let keyIsPressed = false;
+
 function setupWasd() {
     window.addEventListener("keydown", function(event) {
+        keyIsPressed = true;
         if (Util.getKeyCode(event) === 'w') isWalkingForward = true;
         if (Util.getKeyCode(event) === 'a') isWalkingLeft = true;
         if (Util.getKeyCode(event) === 's') isWalkingBackward = true;
@@ -22,6 +25,7 @@ function setupWasd() {
     });
 
     window.addEventListener("keyup", function(event) {
+        keyIsPressed = false;
         if (Util.getKeyCode(event) === 'w') isWalkingForward = false;
         if (Util.getKeyCode(event) === 'a') isWalkingLeft = false;
         if (Util.getKeyCode(event) === 's') isWalkingBackward = false;
