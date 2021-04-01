@@ -31,22 +31,24 @@ class ZipWrapper {
 		this.zip;
 		this.entries;
 		this.ready = false;
-		this.read(url);
 	}
 
-	read(url) {
+	static read(url) {
+		let zipWrapper = new ZipWrapper(url);
+
 	    JSZipUtils.getBinaryContent(url, function(err, data) {
 	        if (err) {
 	            throw err; // or handle err
 	        }
 
-	        this.zip = new JSZip();
-	        zip.loadAsync(data).then(function () {
+	        zipWrapper.zip = new JSZip();
+	        zipWrapper.zip.loadAsync(data).then(function () {
 	            // https://github.com/Stuk/jszip/issues/375
-	            this.entries = Object.keys(zip.files).map(function(name) {
-	                return zip.files[name];
+	            zipWrapper.entries = Object.keys(zipWrapper.zip.files).map(function(name) {
+	                return zipWrapper.zip.files[name];
 	            });
-	            this.ready = true;
+	            zipWrapper.ready = true;
+	            return zipWrapper;
 	        });
 	    });
 	}
